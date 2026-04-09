@@ -74,6 +74,7 @@ public class AdminController {
 	
 	@GetMapping("/viewallteachers")
 	public ResponseEntity<?> viewAllTeachers(){
+		
 		try
 	    {
 	        List<Teacher> teachers = adminService.viewAllTeachers();

@@ -3,6 +3,7 @@ package com.klef.sdp.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.klef.sdp.entity.Admin;
@@ -32,6 +33,8 @@ public class AdminServiceImpl implements AdminService{
 
 	@Override
 	public String addTeacher(Teacher t) {
+		 BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		 t.setPassword(encoder.encode(t.getPassword()));
 		teacherRepository.save(t);
 		return "Teacher Added successfully";
 	}

@@ -1,6 +1,8 @@
 package com.klef.sdp.service;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,8 +45,6 @@ public class TeacherServiceImpl implements TeacherService{
 	@Autowired
 	private StudentFeedbackRepository studentFeedbackRepository;
 	
-	
-	
 	@Override
 	public Teacher verifyTeacherLogin(String username, String pwd) 
 	{
@@ -70,8 +70,8 @@ public class TeacherServiceImpl implements TeacherService{
 	            dto.setSection(t != null ? t.getAssignedSection() : "-"); // section from teacher
 	            return dto;
 	        })
-	        .filter(java.util.Objects::nonNull)
-	        .collect(java.util.stream.Collectors.toList());
+	        .filter(Objects::nonNull)
+	        .collect(Collectors.toList());
 	}
 
 	@Override
@@ -94,6 +94,18 @@ public class TeacherServiceImpl implements TeacherService{
 	    studentAssignmentRepository.save(assignment);
 	    return "Assignment Added Successfully";
 	}
+	
+	@Override
+	public List<StudentAssignment> viewAssignmentsByTeacher(int teacherId) {
+		Teacher teacher = teacherRepository.findById(teacherId).orElse(null);
+
+	    if(teacher!= null)
+	    {
+	        return studentAssignmentRepository.findByTeacherId(teacher);
+	    }
+
+	    return null;
+	}
 
 	@Override
 	public long getTotalStudentsCount(int teacherId) {
@@ -106,29 +118,28 @@ public class TeacherServiceImpl implements TeacherService{
 	    List<StudentRegister> mappings = studentRegisterRepository.findByTeacherId(teacherId);
 	    List<Integer> studentIds = mappings.stream()
 	            .map(StudentRegister::getStudentId)
-	            .distinct()
-	            .collect(java.util.stream.Collectors.toList());
+	            .distinct() 
+	            .collect(Collectors.toList());
 
 	    if (studentIds.isEmpty()) return 0;
 	    return studentMarksRepository.countByStudentIdIn(studentIds);
 	}
 
 	@Override
-	public double getAverageScore(int teacherId) {
+	public double getPassPercentage(int teacherId)
+	{
 	    List<StudentRegister> mappings = studentRegisterRepository.findByTeacherId(teacherId);
+
 	    List<Integer> studentIds = mappings.stream()
 	            .map(StudentRegister::getStudentId)
-	            .distinct()
-	            .collect(java.util.stream.Collectors.toList());
+	            .distinct()                 
+	            .collect(Collectors.toList());
 
 	    if (studentIds.isEmpty()) return 0.0;
 
-	    Double avg = studentMarksRepository.getAverageMarksByStudentIds(studentIds);
-	    return avg != null ? avg : 0.0;
+	    long passed = studentMarksRepository.countPassedStudents(studentIds, 40);
+
+	    return (passed * 100.0) / studentIds.size();
 	}
-
-	
-
-
 
 }

@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -18,6 +20,10 @@ public class StudentAssignment
 	
 	@Column(nullable = false)
 	private int studentId;
+	
+	 @ManyToOne
+	 @JoinColumn(name = "teacher_id") //foreign key column name
+	 private Teacher teacher;
 	
 	@Column(nullable = false)
 	private String subject;
@@ -38,8 +44,24 @@ public class StudentAssignment
 		this.assignment = assignment;
 	}
 	
-	@Override
-	public String toString() {
-		return "StudentAssignmentDTO [subject=" + subject + ", assignment=" + assignment + "]";
+	
+	public int getId() {
+		return id;
 	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public int getStudentId() {
+		return studentId;
+	}
+	public void setStudentId(int studentId) {
+		this.studentId = studentId;
+	}
+	public Teacher getTeacher() {
+		return teacher;
+	}
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
+	}
+	
 }

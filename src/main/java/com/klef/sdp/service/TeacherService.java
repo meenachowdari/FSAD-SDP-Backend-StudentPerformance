@@ -19,10 +19,11 @@ public interface TeacherService
 	public String addMarks(StudentMarks marks);
 	public String addFeedback(StudentFeedback feedback);
 	public String addAssignment(StudentAssignment assignment);
+	List<StudentAssignment> viewAssignmentsByTeacher(int teacherId);
 	
 	 long getTotalStudentsCount(int teacherId);
 
 	 long getTestsGivenCount(int teacherId);
 
-	 double getAverageScore(int teacherId);
+	 double getPassPercentage(int teacherId);
 }

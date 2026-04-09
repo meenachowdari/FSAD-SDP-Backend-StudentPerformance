@@ -3,6 +3,7 @@ package com.klef.sdp.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.klef.sdp.entity.Student;
@@ -41,6 +42,8 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public String studentRegistration(Student s) {
+    	BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        s.setPassword(encoder.encode(s.getPassword()));
         s.setStatus("PENDING");
         studentRepository.save(s);
         return "Student Registered Waiting for Admin Approval";

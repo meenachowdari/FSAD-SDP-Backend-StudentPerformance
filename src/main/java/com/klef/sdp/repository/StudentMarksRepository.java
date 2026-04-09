@@ -13,6 +13,6 @@ public interface StudentMarksRepository extends JpaRepository<StudentMarks, Inte
     
     long countByStudentIdIn(List<Integer> studentIds);
 
-    @Query("select avg(m.marks) from StudentMarks m where m.studentId in :studentIds")
-    Double getAverageMarksByStudentIds(@Param("studentIds") List<Integer> studentIds);
+    @Query("SELECT COUNT(DISTINCT sm.studentId) FROM StudentMarks sm WHERE sm.studentId IN :studentIds AND sm.marks >= :passMarks")
+    long countPassedStudents(List<Integer> studentIds, double passMarks);
 }
