@@ -41,7 +41,9 @@ public class JwtFilter extends OncePerRequestFilter
                 "/swagger-ui",
                 "/v3/api-docs",
                 "/swagger-ui.html",
-                "/studentapi/register"
+                "/studentapi/register",
+            "/demoapi",
+            "/api/payments"
         );
 
         boolean isPublic = publicPaths.stream()

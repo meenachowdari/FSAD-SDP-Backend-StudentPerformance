@@ -48,7 +48,9 @@ public class SecurityConfig
                     "/swagger-ui.html",
                     "/auth/**",
                     "/studentapi/register",
-                    "/studentapi/register/**"
+                    "/studentapi/register/**",
+                    "/demoapi/**",
+                    "/api/payments/**"
                 ).permitAll()
 
                 .requestMatchers("/adminapi/**").hasAuthority("ADMIN")
@@ -91,7 +93,7 @@ public class SecurityConfig
     {
         CorsConfiguration config = new CorsConfiguration();
 
-        config.setAllowedOrigins(List.of("http://localhost:2023/")); // frontend url
+        config.setAllowedOrigins(List.of("http://localhost:2023")); // frontend url
         
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
