@@ -18,7 +18,7 @@ import com.klef.sdp.service.TeacherService;
 
 @RestController
 @RequestMapping("teacherapi")
-@CrossOrigin("*")
+@CrossOrigin(origins = "https://your-frontend.vercel.app")
 
 public class TeacherController {
 

@@ -17,7 +17,7 @@ import jakarta.mail.internet.MimeMessage;
 
 @RestController
 @RequestMapping("/demoapi")
-@CrossOrigin("*")
+@CrossOrigin(origins = "https://your-frontend.vercel.app")
 public class DemoController {
 
 
