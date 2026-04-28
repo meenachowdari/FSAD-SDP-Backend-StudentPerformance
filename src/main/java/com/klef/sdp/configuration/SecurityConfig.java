@@ -93,7 +93,10 @@ public class SecurityConfig
     {
         CorsConfiguration config = new CorsConfiguration();
 
-        config.setAllowedOrigins(List.of("http://localhost:2023")); // frontend url
+        config.setAllowedOrigins(List.of(
+        	    "http://localhost:2023",
+        	    "https://your-vercel-project.vercel.app"  // ← Replace with your actual Vercel URL
+        	));// frontend url
         
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
@@ -104,4 +107,5 @@ public class SecurityConfig
 
         return source;
     }
+    
 }
