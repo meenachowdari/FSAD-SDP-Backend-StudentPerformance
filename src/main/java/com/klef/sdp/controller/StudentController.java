@@ -16,7 +16,7 @@ import com.klef.sdp.service.StudentService;
 
 @RestController
 @RequestMapping("studentapi")
-@CrossOrigin(origins = "https://your-frontend.vercel.app")
+@CrossOrigin(originPatterns = {"http://localhost:2023", "https://*.vercel.app"})
 
 public class StudentController {
 	

@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@CrossOrigin(origins = "https://your-frontend.vercel.app")
+@CrossOrigin(originPatterns = {"http://localhost:2023", "https://*.vercel.app"})
 @RequestMapping("/api/payments")
 public class RazorPayController {
 

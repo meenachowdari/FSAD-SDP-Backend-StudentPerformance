@@ -23,7 +23,7 @@ import com.klef.sdp.service.AdminService;
 
 @RestController
 @RequestMapping("adminapi")
-@CrossOrigin(origins = "https://your-frontend.vercel.app")
+@CrossOrigin(originPatterns = {"http://localhost:2023", "https://*.vercel.app"})
 public class AdminController {
 
 	@Autowired

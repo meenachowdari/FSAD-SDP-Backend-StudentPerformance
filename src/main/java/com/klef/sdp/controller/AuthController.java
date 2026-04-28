@@ -19,7 +19,7 @@ import com.klef.sdp.service.UserService;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = "https://your-frontend.vercel.app")
+@CrossOrigin(originPatterns = {"http://localhost:2023", "https://*.vercel.app"})
 public class AuthController 
 {
     @Autowired
