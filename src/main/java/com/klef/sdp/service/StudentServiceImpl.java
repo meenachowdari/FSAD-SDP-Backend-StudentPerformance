@@ -1,6 +1,9 @@
 package com.klef.sdp.service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -119,6 +122,31 @@ public class StudentServiceImpl implements StudentService {
 		t.put("subjects", teacher.getSubjects());
 
 		return t;
+	}
+
+	@Override
+	public List<Map<String, Object>> getAssignedTeachers(int studentId)
+	{
+		List<StudentRegister> mappings = studentRegisterRepository.findByStudentId(studentId);
+
+		return mappings.stream()
+				.map(map -> {
+					Teacher teacher = teacherRepository.findById(map.getTeacherId()).orElse(null);
+					if (teacher == null) {
+						return null;
+					}
+
+					Map<String, Object> teacherData = new HashMap<>();
+					teacherData.put("teacherId", teacher.getId());
+					teacherData.put("teacherName", teacher.getName());
+					teacherData.put("email", teacher.getEmail());
+					teacherData.put("department", teacher.getDepartment());
+					teacherData.put("subjects", teacher.getSubjects());
+					teacherData.put("mappedAt", map.getMappedAt());
+					return teacherData;
+				})
+				.filter(java.util.Objects::nonNull)
+				.collect(Collectors.toList());
 	}
 
 	@Override

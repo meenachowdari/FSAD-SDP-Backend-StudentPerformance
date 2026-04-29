@@ -101,6 +101,23 @@ public class StudentController {
 			  return ResponseEntity.status(500).body("Internal Server Error");
 		  }
 	  }
+
+	  @GetMapping("/assigned-teachers/{studentId}")
+	  public ResponseEntity<?> getAssignedTeachers(@PathVariable int studentId)
+	  {
+		  try
+		  {
+			  return ResponseEntity.ok(studentService.getAssignedTeachers(studentId));
+		  }
+		  catch (RuntimeException e)
+		  {
+			  return ResponseEntity.status(404).body(e.getMessage());
+		  }
+		  catch (Exception e)
+		  {
+			  return ResponseEntity.status(500).body("Internal Server Error");
+		  }
+	  }
 	  
 	  @GetMapping("/reports/{studentId}")
 	  public ResponseEntity<?> viewReports(@PathVariable int studentId) {
