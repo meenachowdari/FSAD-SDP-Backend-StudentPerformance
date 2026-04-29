@@ -37,6 +37,8 @@ public class JwtFilter extends OncePerRequestFilter
 
      // Public endpoints (no authentication required)
         List<String> publicPaths = List.of(
+            "/",
+            "/health",
                 "/auth",
                 "/swagger-ui",
                 "/v3/api-docs",

@@ -97,8 +97,7 @@ public class SecurityConfig
 
         config.setAllowedOriginPatterns(List.of(
 		    "http://localhost:2023",
-		    "https://*.vercel.app",
-            "https://*.up.railway.app"
+		    "https://*.vercel.app"
 		));// frontend url
         
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
