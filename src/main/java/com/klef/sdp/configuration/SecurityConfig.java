@@ -43,6 +43,8 @@ public class SecurityConfig
             .authenticationProvider(authenticationProvider())
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(
+                    "/",
+                    "/health",
                     "/swagger-ui/**",
                     "/v3/api-docs/**",
                     "/swagger-ui.html",
@@ -96,7 +98,7 @@ public class SecurityConfig
         config.setAllowedOriginPatterns(List.of(
 		    "http://localhost:2023",
 		    "https://*.vercel.app",
-		    "https://*.up.railway.app/"
+            "https://*.up.railway.app"
 		));// frontend url
         
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
